@@ -1,0 +1,12 @@
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+h1, h2, h3, .display {
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.tick {
+  background-image: radial-gradient(circle, #14140F 1px, transparent 1px);
+  background-size: 14px 14px;
+}
