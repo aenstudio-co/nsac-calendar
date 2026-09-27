@@ -27,18 +27,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const list = document.getElementById('docsList');
   CONFIG.docs.forEach(doc => {
-    const a = document.createElement('a');
-    a.href = doc.url;
-    a.target = '_blank';
-    a.rel = 'noopener';
-    a.className = 'flex items-center justify-between px-6 py-4 hover:bg-lavender/40 transition group';
-    a.innerHTML = `
+    const isAvailable = doc.available !== false;
+    const el = document.createElement(isAvailable ? 'a' : 'div');
+    if (isAvailable) {
+      el.href = doc.url;
+      el.target = '_blank';
+      el.rel = 'noopener';
+    }
+    el.className = isAvailable
+      ? 'flex items-center justify-between px-6 py-4 hover:bg-lavender/40 transition group'
+      : 'flex items-center justify-between px-6 py-4 opacity-50 cursor-not-allowed';
+    el.innerHTML = `
       <div>
         <p class="font-medium">${doc.label}</p>
         <p class="text-sm text-muted">${doc.desc}</p>
       </div>
-      <span class="text-sm text-ink/50 group-hover:text-ink transition">Navigate to</span>
+      <span class="text-sm text-ink/50 ${isAvailable ? 'group-hover:text-ink transition' : ''}">${isAvailable ? 'Link' : 'Coming soon'}</span>
     `;
-    list.appendChild(a);
+    list.appendChild(el);
   });
 });
